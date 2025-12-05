@@ -1,7 +1,13 @@
 # 一键更新内核脚本
 
 ```bash
+
+# 直接使用GitHub原始链接
 sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GengWei1997/kernel-deb/refs/heads/main/Update-kernel.sh)"
+
+# 使用ghproxy加速
+sudo bash -c "$(curl -fsSL https://ghfast.top/https://raw.githubusercontent.com/GengWei1997/kernel-deb/refs/heads/main/ghproxy-Update-kernel.sh)"
+
 ```
 
 # 更新内容：
