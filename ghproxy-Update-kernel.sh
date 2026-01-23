@@ -81,7 +81,6 @@ else
 fi
 
 echo "11. 覆盖设备树 dtb 到系统目录"
-mkdir -p /boot/dtbs/qcom
 cp -f sm8150-xiaomi-raphael.dtb /boot/dtbs/qcom/sm8150-xiaomi-raphael.dtb
 if [ $? -ne 0 ]; then
     echo "错误：拷贝 dtb 失败"
