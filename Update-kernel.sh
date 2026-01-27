@@ -26,7 +26,7 @@ dpkg --get-selections | grep linux
 
 echo "4. 查找并卸载所有linux-xiaomi内核包"
 echo "   正在查找linux-xiaomi相关包..."
-dpkg -l | grep -E "linux-image|linux-headers|linux-xiaomi-raphael" | awk '{print $2}' | xargs -r dpkg -P
+dpkg -l | grep -E "linux-headers|linux-image|linux-xiaomi-raphael" | awk '{print $2}' | xargs -r dpkg -P
 
 echo "5. 清理/lib/modules目录（删除所有内核模块）"
 rm -rf /lib/modules/*
