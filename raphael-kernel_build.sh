@@ -15,10 +15,10 @@ git commit -m "builddeb: Add Qcom SM8150 DTBs to boot partition"
 wget -O arch/arm64/configs/raphael.config https://raw.githubusercontent.com/GengWei1997/kernel-deb/refs/heads/main/uboot-raphael.config
 
 # 生成内核配置
-make -j$(nproc) ARCH=arm64 LLVM=1 defconfig raphael.config
+make -j$(nproc) ARCH=arm64 LLVM=-21 defconfig raphael.config
 
 # 编译内核
-make -j$(nproc) ARCH=arm64 LLVM=1 deb-pkg
+make -j$(nproc) ARCH=arm64 LLVM=-21 deb-pkg
 
 cd ..
 
