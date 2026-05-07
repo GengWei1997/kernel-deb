@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       kernel_version:
-        description: '内核版本号 (如 6.18)'
+        description: '内核版本号 (如 7.0)'
         required: true
-        default: '6.18'
+        default: '7.0'
 
 # 工作流配置
 jobs:
@@ -40,7 +40,7 @@ jobs:
           
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
-          sudo ./llvm.sh 21
+          sudo ./llvm.sh 22
       
       # 设置 ccache 缓存
       - name: 设置 ccache
@@ -72,46 +72,10 @@ jobs:
           # 执行内核编译脚本
           sudo bash raphael-kernel_build.sh ${{ inputs.kernel_version }}
       
-      # 获取准确的内核版本号
-      - name: 获取准确内核版本号
-        id: get-kernel-version
-        run: |
-          KERNEL_VERSION=$(dpkg-deb -f linux-image-xiaomi-raphael.deb Package | sed 's/linux-image-//')
-          echo "准确的内核版本号: $KERNEL_VERSION"
-          echo "kernel_version=$KERNEL_VERSION" >> $GITHUB_OUTPUT
-          
-      # 获取当前时间戳
-      - name: 获取构建时间
-        id: get-timestamp
-        run: |
-          echo "timestamp=$(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
-      
-      # 列出编译产物
-      - name: 列出编译产物
-        run: ls -la *.deb
-      
-      # 创建 GitHub Release 并上传编译产物
-      - name: 创建 Release 并上传产物
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ inputs.kernel_version }}
-          name: "${{ steps.get-kernel-version.outputs.kernel_version }}"
-          body: |
-            - 版本: ${{ steps.get-kernel-version.outputs.kernel_version }}
-            - 构建时间: ${{ steps.get-timestamp.outputs.timestamp }}
-            - 构建 ID: ${{ env.BUILD_TIMESTAMP }}
-          draft: false
-          prerelease: false
-          files: |
-            linux-image-xiaomi-raphael.deb
-            linux-headers-xiaomi-raphael.deb
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
       # 上传编译产物作为工作流制品
       - name: 上传内核包作为工作流制品
         uses: actions/upload-artifact@v4
         with:
           name: kernel-packages-v${{ inputs.kernel_version }}
           path: |
-            *.deb
+            raphael.config
