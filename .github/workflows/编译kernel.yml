@@ -44,7 +44,7 @@ jobs:
       
       # 设置 ccache 缓存
       - name: 设置 ccache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.ccache
           key: ${{ runner.os }}-ccache-kernel-${{ inputs.kernel_version }}
@@ -84,7 +84,7 @@ jobs:
       
       # 创建 GitHub Release 并上传编译产物
       - name: 创建 Release 并上传产物
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: kernel-v${{ inputs.kernel_version }}
           name: "xiaomi raphael linux内核 v${{ inputs.kernel_version }}"
