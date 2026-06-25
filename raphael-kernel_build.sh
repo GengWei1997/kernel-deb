@@ -8,6 +8,8 @@ git clone https://github.com/GengWei1997/linux.git --branch raphael-$1 --depth 1
 patch linux/scripts/package/builddeb < builddeb.patch
 
 cd linux
+git config --global user.email "gw19970326@gmail.com"
+git config --global user.name "GengWei1997"
 git add .
 git commit -m "builddeb: Add Qcom SM8150 DTBs to boot partition"
 
