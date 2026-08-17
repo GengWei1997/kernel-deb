@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
     inputs:
       kernel_version:
-        description: '内核版本号 (如 7.1)'
+        description: '内核版本号 (如 7.2)'
         required: true
-        default: '7.1'
+        default: '7.2'
 
 # 工作流配置
 jobs:
