@@ -3,14 +3,14 @@
 echo "=== 内核更新脚本 ==="
 echo ""
 echo "请选择要安装的内核版本："
-echo "  1) kernel-v7.1"
+echo "  1) kernel-v7.2"
 echo "  2) 自定义版本号"
 echo ""
 read -p "请输入选项 [1-2]: " choice
 
 case $choice in
     1)
-        KERNEL_VERSION="7.1"
+        KERNEL_VERSION="7.2"
         ;;
     2)
         read -p "请输入版本号: " KERNEL_VERSION
