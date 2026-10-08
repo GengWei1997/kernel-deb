@@ -4,14 +4,7 @@ set -e  # 遇到错误立即退出
 # 克隆指定版本的内核源码
 git clone https://github.com/GengWei1997/linux.git --branch raphael-$1 --depth 1 linux
 
-# 应用 builddeb 补丁
-patch linux/scripts/package/builddeb < builddeb.patch
-
 cd linux
-git config --global user.email "gw19970326@gmail.com"
-git config --global user.name "GengWei1997"
-git add .
-git commit -m "builddeb: Add Qcom SM8150 DTBs to boot partition"
 
 # 生成内核配置
 cp ../raphael.config arch/arm64/configs/
