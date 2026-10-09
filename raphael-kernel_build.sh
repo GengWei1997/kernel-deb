@@ -8,10 +8,10 @@ cd linux
 
 # 生成内核配置
 cp ../raphael.config arch/arm64/configs/
-make -j$(nproc) ARCH=arm64 LLVM=-22 defconfig raphael.config
+make -j$(nproc) ARCH=arm64 LLVM=-23 defconfig raphael.config
 
 # 编译内核
-make -j$(nproc) ARCH=arm64 LLVM=-22 deb-pkg
+make -j$(nproc) ARCH=arm64 LLVM=-23 deb-pkg
 
 cd ..
 
