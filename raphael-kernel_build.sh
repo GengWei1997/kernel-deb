@@ -6,12 +6,21 @@ git clone https://github.com/GengWei1997/linux.git --branch raphael-$1 --depth 1
 
 cd linux
 
+# 统一的内核 make 封装：ccache 存在时用 ccache 包裹 clang-23 加速重复编译
+kmake() {
+  if command -v ccache >/dev/null 2>&1; then
+    make -j$(nproc) ARCH=arm64 LLVM=-23 CC="ccache clang-23" HOSTCC="ccache clang-23" "$@"
+  else
+    make -j$(nproc) ARCH=arm64 LLVM=-23 "$@"
+  fi
+}
+
 # 生成内核配置
 cp ../raphael.config arch/arm64/configs/
-make -j$(nproc) ARCH=arm64 LLVM=-23 defconfig raphael.config
+kmake defconfig raphael.config
 
 # 编译内核
-make -j$(nproc) ARCH=arm64 LLVM=-23 deb-pkg
+kmake deb-pkg
 
 cd ..
 
